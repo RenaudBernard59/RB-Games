@@ -107,8 +107,17 @@ while True:
                 pygame.draw.rect(playSurface,whiteColour,Rect(position[0],position[1],20,20))
                 pygame.draw.rect(playSurface,redColour,Rect(position[0],position[1],20,20))
                 pygame.display.flip()
-             #dead
-            
+            #Kill all snakes
+            if snakePosition[0] > 800 or snakePosition[0] < 0:
+                gameOver()
+            if snakePosition[1] > 600 or snakePosition[1] < 0:
+                gameOver()
+            #Je me suis mordu la queue
+            for snakeBody in snakeSegments[1]:
+                if snakePosition[0] == snakeBody[0] and snakePosition[1] == snakeBody[1]:
+                    gameOver()
+            #60FPS 4K 3D HDR VR
+                    fpsClock.tick(20)
                     
 
 

@@ -15,7 +15,8 @@ __status__ = "Production"
 
 ######################################
 #Initialise project
-import pygame, sys, time, random from pygame.locals import *
+import pygame,sys,time,random
+from pygame.locals import *
 pygame.init()
 fpsClock = pygame.time.Clock()
 
@@ -34,7 +35,7 @@ greyColour = pygame.Color(150, 150, 150)
 snakePosition = [100, 100]
 snakeSegments[(100, 100), (80, 100), (60, 100)]
 raspeberryPosition = [300, 300] #Pas trop utile
-raspberry Spawned = 1
+raspberrySpawned = 1
 direction = "right"
 changeDirection = direction
 
@@ -96,10 +97,10 @@ while True:
             else:
                 snakeSegment.pop()
             #Un nouveau miammiam random
-            if raspberrySpawned ==0:
+            if raspberrySpawned == 0:
                 x = random.randrange(1,6)
                 y = random.ranrange(1,8)
-                raspberryPosition = [int(x*100), int(y*100)
+                raspberryPosition = [int(x*100), int(y*100)]
                 raspberrySpawned = 1
             #Redessiner le bordel
                 playSurface(blackColour)
@@ -118,7 +119,7 @@ while True:
                     gameOver()
             #60FPS 4K 3D HDR VR
                     fpsClock.tick(20)
-                    
+#END Boulce While
 
 
 

@@ -91,6 +91,24 @@ while True:
             #BodySnake
             snakeSegments.insert(0, list(snakePosition))
             #Toujours plus long
+            if snakePosition[0] == raspberryPosition[0] and snakePosition[1] == raspberryPosition[1]:
+                raspberrySpawned = 0
+            else:
+                snakeSegment.pop()
+            #Un nouveau miammiam random
+            if raspberrySpawned ==0:
+                x = random.randrange(1,6)
+                y = random.ranrange(1,8)
+                raspberryPosition = [int(x*100), int(y*100)
+                raspberrySpawned = 1
+            #Redessiner le bordel
+                playSurface(blackColour)
+            for position in snakeSegments:
+                pygame.draw.rect(playSurface,whiteColour,Rect(position[0],position[1],20,20))
+                pygame.draw.rect(playSurface,redColour,Rect(position[0],position[1],20,20))
+                pygame.display.flip()
+             #dead
+            
                     
 
 

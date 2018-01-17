@@ -16,6 +16,18 @@ __status__ = "Production"
 ######################################
 #Initialise project
 
+#Libraries
+import pygame
+from pygame.locals import *
+
+#Screen properties
+width, height = 800, 600 #pixels
+
+#Colors
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+
 
 
 ######################################
@@ -26,7 +38,32 @@ def main():
     Main components of the program.
     :return:
     """
+    pygame.init()
+    screen = pygame.display.set_mode((width,height))
+
+    eventsListener(screen)
+#END funct main
+
+def eventsListener(screen):
+    """
+    Using keyboard inputs
+    :return:
+    """
+    running = True
+    while running:
+        #Quitter
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+        #Dessiner
+        pygame.draw.rect(screen,white, (100,100,60,20))
+        pygame.display.update() #Mettre à jour Pygame
+
+    pygame.quit()#Quit the game
+#END funct enventsListener
 
 
-
+######################################
+#Appel des fonctions
+main()
 

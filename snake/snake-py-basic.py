@@ -36,6 +36,14 @@ cellSize = 20 #Cise of one Cell
 cellX = 40
 cellY = 30
 
+#Moves
+up = (0, -1)
+down = (0, +1)
+left = (-1, 0)
+right = (+1, 0)
+
+#TimeSet
+fps = 15
 
 ######################################5
 #Def Main
@@ -47,41 +55,86 @@ def main():
     """
     pygame.init()
     screen = pygame.display.set_mode((width,height))
-    eventsListener(screen)
+    clock = pygame.time.Clock()
+    eventsListener(screen, clock)
 #END funct main
 
-def eventsListener(screen):
+def eventsListener(screen, clock):
     """
     Using keyboard inputs
     :return:
     """
     running = True
     fruit = (10,10)
-    myParties = [(3,8),(2,9),(4,3),(12,10),(5,3)]
+    snakeParts = [(14,10),(13,10),(12,10),(11,10),(10,10)]
+    snakeSize = 4
+    orientation = left
     while running:
-        #Quitter
+        #Horloge
+        clock.tick(fps)
         for event in pygame.event.get():
+            #Exit
             if event.type == QUIT:
                 running = False
+            #MooveOn
+            if event.type == KEYDOWN:
+                if event.key == K_UP or event.key == ord("w"):
+                    orientation = up
+                if event.key == K_DOWN or event.key == ord("s"):
+                    orientation = down
+                if event.key == K_LEFT or event.key == ord("a"):
+                    orientation = left
+                if event.key == K_RIGHT or event.key == ord("d"):
+                    orientation = right
+        update(snakeParts, orientation, snakeSize)
         #Dessiner
-        render(screen, fruit, myParties)
+        render(screen, fruit, snakeParts)
         pygame.display.update() #Mettre à jour Pygame
      #END boucle while
     pygame.quit()#Quit the game
 #END funct enventsListener
 
-def render(screen, fruit, myParties):
+def render(screen, fruit, snakeParts):
+    """
+
+    :param screen:
+    :param fruit:
+    :param snakeParts:
+    :return:
+    """
     screen.fill(grey)
     #x, y = fruit
     drawCell(screen, fruit, red)
-    for partie in myParties:
-        drawCell(screen, partie, blue)
+    for partie in snakeParts:
+        drawCell(screen, partie, white)
 #END funct render
 
+def update(snakeParts, orientation, snakeSize):
+    """
+
+    :param snakeParts:
+    :param orientation:
+    :return:
+    """
+    x, y = snakeParts[-1]
+    x += orientation[0]
+    y += orientation[1]
+    newPart = (x,y)
+    snakeParts.append(newPart)
+    if len(snakeParts) > snakeSize:
+        del snakeParts[0]
+#END funct update
 
 def drawCell(screen, cell, color):
-    pygame.draw.rect(screen, color, (cell[0]*cellSize, cell[1]*cellSize, cellSize, cellSize))
+    """
 
+    :param screen:
+    :param cell:
+    :param color:
+    :return:
+    """
+    pygame.draw.rect(screen, color, (cell[0]*cellSize, cell[1]*cellSize, cellSize, cellSize))
+#END funct drawCell
 
 
 

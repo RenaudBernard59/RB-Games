@@ -19,7 +19,7 @@ __status__ = "Production"
 #Libraries
 import pygame
 from pygame.locals import *
-
+from ramdom import randint
 #Screen properties
 width, height = 800, 600 #pixels
 
@@ -65,7 +65,6 @@ def eventsListener(screen, clock):
     :return:
     """
     running = True
-    fruit = (10,10)
     snakeParts = [(14,10),(13,10),(12,10),(11,10),(10,10)]
     snakeSize = 4
     orientation = left
@@ -94,7 +93,7 @@ def eventsListener(screen, clock):
     pygame.quit()#Quit the game
 #END funct enventsListener
 
-def render(screen, fruit, snakeParts):
+def render(screen, snakeParts):
     """
 
     :param screen:
@@ -103,7 +102,6 @@ def render(screen, fruit, snakeParts):
     :return:
     """
     screen.fill(grey)
-    #x, y = fruit
     drawCell(screen, fruit, red)
     for partie in snakeParts:
         drawCell(screen, partie, white)
@@ -116,11 +114,15 @@ def update(snakeParts, orientation, snakeSize):
     :param orientation:
     :return:
     """
+    global fruit
     x, y = snakeParts[-1]
     x += orientation[0]
     y += orientation[1]
     newPart = (x,y)
     snakeParts.append(newPart)
+    if newPart == fruit:
+        snakeSize += 1
+
     if len(snakeParts) > snakeSize:
         del snakeParts[0]
 #END funct update
@@ -136,9 +138,16 @@ def drawCell(screen, cell, color):
     pygame.draw.rect(screen, color, (cell[0]*cellSize, cell[1]*cellSize, cellSize, cellSize))
 #END funct drawCell
 
+def newFruit():
+    """
 
-
-
+    :return:
+    """
+    global fruit
+    x = randint(0, cellX-1)
+    y = randint(0, cellY-1)
+    fruit = (x,y)
+# END funct newFruit
 
 
 

@@ -1,5 +1,17 @@
 #!/usr/bin/enb python
+# coding: utf-8
+###################################
+# Jeu Python
+# Version Py : python3
+# Derrière Mise à jour 17/01/2017
+###################################
 
+__author__ = "Renaud BERNARD"
+__copyright__ = "Copyright 2018"
+__license__ = "Free"
+__version__ = "1.0.1"
+__email__ = "renaud.bernard@p59production.com"
+__status__ = "Production"
 
 ######################################
 #Initialise project
@@ -29,17 +41,38 @@ changeDirection = direction
 ######################################
 #Functions
 
-def def gameOver():
-        gameOverFont = pygame.font.Font('freesansbold.ttf', 100) #Vérifer police
-        gameOverSurf = gameOverFont.render("Game over \n Le serpent s'est mordu la queue", True, greyColor)
-        gameOverRect = gameOverRect = gameOverSurf.get_rect()
-        gameOverRect.midtop=(400, 30)
-        play.Surface.blit(gameOverSurf, gameOverRect)
-        pygame.display.flip()
-        time.sleep(5)
-        pygame.quit()
-        sys.exit()
-    #END func gameOver
+def gameOver():
+    gameOverFont = pygame.font.Font('freesansbold.ttf', 100) #Vérifer police
+    gameOverSurf = gameOverFont.render("Game over \n Le serpent s'est mordu la queue", True, greyColor)
+    gameOverRect = gameOverRect = gameOverSurf.get_rect()
+    gameOverRect.midtop=(400, 30)
+    play.Surface.blit(gameOverSurf, gameOverRect)
+    pygame.display.flip()
+    time.sleep(5)
+    pygame.quit()
+    sys.exit()
+#END func gameOver
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 

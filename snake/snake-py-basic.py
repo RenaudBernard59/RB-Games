@@ -53,8 +53,45 @@ def gameOver():
     sys.exit()
 #END func gameOver
 
-
-
+while True:
+    for even in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type ==KEYDOWN: #Vérifier AZRETY-QUERTY
+            #Direction quand on appuie sur les touches
+            if event.key == K_RIGHT or event.key == ord('d'):
+                changeDirection = "right"
+            if event.key == K_LEFT or event.key == ord('q'):
+                changeDirection = "left"
+            if event.key == K_UP or event.key == ord('z'):
+                changeDirection = "up"
+            if event.key == K_DOWN or event.key == ord('s'):
+                changeDirection = "down"
+            if event.key == K_ESCAPE:
+                pygame.event.post(pygame.event.Event(QUIT))
+            #Eviter que le serpet ne revienne pas sur ses pas du genre 360
+            if changeDirection == "right" and not direction == "left":
+                direction = changeDirection
+            if changeDirection == "left" and not direction == "right":
+                direction = changeDirection
+            if changeDirection == "up" and not direction == "down":
+                direction = changeDirection
+            if changeDirection == "down" and not direction == "up":
+                direction = changeDirection
+            #gestion des distances
+            if direction == "right":
+                snakePosition[0] +=20
+            if direction == "right":
+                snakePosition[0] -=20
+            if direction == "right":
+                snakePosition[1] -=20
+            if direction == "right":
+                snakePosition[1] +=20
+            #BodySnake
+            snakeSegments.insert(0, list(snakePosition))
+            #Toujours plus long
+                    
 
 
 

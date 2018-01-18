@@ -19,7 +19,7 @@ __status__ = "Production"
 #Libraries
 import pygame
 from pygame.locals import *
-from ramdom import randint
+from random import randint
 #Screen properties
 width, height = 800, 600 #pixels
 
@@ -64,10 +64,9 @@ def eventsListener(screen, clock):
     Using keyboard inputs
     :return:
     """
+    global orientation, over
     running = True
-    snakeParts = [(14,10),(13,10),(12,10),(11,10),(10,10)]
-    snakeSize = 4
-    orientation = left
+    reset()
     while running:
         #Horloge
         clock.tick(fps)
@@ -75,25 +74,34 @@ def eventsListener(screen, clock):
             #Exit
             if event.type == QUIT:
                 running = False
-            #MooveOn
+            #MClavier
             if event.type == KEYDOWN:
+                #Reset
+                if event.key == K_r or event.key == ord("r"):
+                    reset()
+                #MooveOn
                 if event.key == K_UP or event.key == ord("w"):
-                    orientation = up
+                    if orientation != down:
+                        orientation = up
                 if event.key == K_DOWN or event.key == ord("s"):
-                    orientation = down
+                    if orientation != up:
+                        orientation = down
                 if event.key == K_LEFT or event.key == ord("a"):
-                    orientation = left
+                    if orientation != right:
+                        orientation = left
                 if event.key == K_RIGHT or event.key == ord("d"):
-                    orientation = right
-        update(snakeParts, orientation, snakeSize)
+                    if orientation != left:
+                        orientation = right
+        if not over:
+            update()
         #Dessiner
-        render(screen, fruit, snakeParts)
+        render(screen)
         pygame.display.update() #Mettre à jour Pygame
      #END boucle while
     pygame.quit()#Quit the game
 #END funct enventsListener
 
-def render(screen, snakeParts):
+def render(screen):
     """
 
     :param screen:
@@ -101,30 +109,45 @@ def render(screen, snakeParts):
     :param snakeParts:
     :return:
     """
+    global snakeParts, fruit
     screen.fill(grey)
     drawCell(screen, fruit, red)
     for partie in snakeParts:
         drawCell(screen, partie, white)
 #END funct render
 
-def update(snakeParts, orientation, snakeSize):
+def update():
     """
 
     :param snakeParts:
     :param orientation:
     :return:
     """
-    global fruit
+    global fruit, snakeParts, snakeSize, orientation, over, score
     x, y = snakeParts[-1]
     x += orientation[0]
     y += orientation[1]
     newPart = (x,y)
-    snakeParts.append(newPart)
+    # Collisions avec lui même
+    if newPart in snakeParts:
+        over = True
+    #Collisions avec le bord
+    if not 0 <= x < cellX:
+        over = True
+    if not 0 <= y < cellY:
+        over = True
+    # Il grandit quand il touche le fruit
     if newPart == fruit:
         snakeSize += 1
-
-    if len(snakeParts) > snakeSize:
-        del snakeParts[0]
+        score += 1
+        newFruit()
+    if over:
+        print("Game over !", "Score : ", score)
+    snakeParts.append(newPart)
+    if not over:
+        #Il avance
+        if len(snakeParts) > snakeSize:
+            del snakeParts[0]
 #END funct update
 
 def drawCell(screen, cell, color):
@@ -144,12 +167,23 @@ def newFruit():
     :return:
     """
     global fruit
-    x = randint(0, cellX-1)
-    y = randint(0, cellY-1)
+    x = randint(0, cellX - 1)
+    y = randint(0, cellY - 1)
     fruit = (x,y)
 # END funct newFruit
 
+def reset():
+    """
 
+    :return:
+    """
+    global snakeParts, snakeSize, orientation, over, score
+    newFruit()
+    snakeParts = [(40,0)]
+    score = 0
+    snakeSize = 4
+    orientation = left
+    over = False
 
 
 ######################################

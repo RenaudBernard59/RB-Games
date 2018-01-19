@@ -81,22 +81,39 @@ window.onload = function draw() {
  	ctx.fillRect(cellSize*4,cellSize*4,cellSize,cellSize);
 }
 
-document.addEventListener("keypress", function(e) {
-	d = document.getElementById("debug");
+var K_press = document.addEventListener("keypress", function(e) {
 	alert(e.key)
 }, false)
+
+
+document.getElementById("up").addEventListener("click", function(e) {
+		alert(a_UP)
+	}, false); 
+var A_press = document.getElementById("down").addEventListener("click", function(e) {
+		alert(a_DPWN)
+	}, false); 
+var A_press = document.getElementById("left").addEventListener("click", function(e) {
+		alert(a_LEFT)
+	}, false); 
+var A_press = document.getElementById("right").addEventListener("click", function(e) {
+		alert(a_RIGHT)
+	}, false); 
+var A_press = document.getElementById("pause").addEventListener("click", function(e) {
+		alert(a_PAUSE)
+	}, false); 
+var A_press = document.getElementById("restart").addEventListener("click", function(e) {
+		alert(a_RESTART)
+	}, false); 
+
+
 
 
 
 /*
 window.requestAnimFrame = funcrion(){}
 
-document.getElementById("up").addEventListener("click", gestionnaireEvenements("up")); 
-document.getElementById("down").addEventListener("click", gestionnaireEvenements("down")); 
-document.getElementById("left").addEventListener("click", gestionnaireEvenements("left")); 
-document.getElementById("right").addEventListener("click", gestionnaireEvenements("right"));
-document.getElementById("pause").addEventListener("click", gestionnaireEvenements("pause"));
-document.getElementById("restart").addEventListener("click", gestionnaireEvenements("restart"));
+
+
 
 
 AZERTY

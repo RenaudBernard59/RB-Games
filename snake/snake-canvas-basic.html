@@ -42,6 +42,7 @@
 	<canvas id="canvas" width="800px" height="600px">
 		Canvas non disponible ici. Change de navigateur.
 	</canvas>
+	<div id="debug"></div>
 	<div id="controls">
 		<div id="up">UP</div>
 		<div id="down">DOWN</div>
@@ -72,7 +73,7 @@ var right = (+1, 0)
 var fruit, snakeParts, snakeSize, orientation, over, score
 
 //Fonctions
-function draw() {
+window.onload = function draw() {
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 
@@ -80,8 +81,44 @@ function draw() {
  	ctx.fillRect(cellSize*4,cellSize*4,cellSize,cellSize);
 }
 
-draw()
+document.addEventListener("keypress", function(e) {
+	d = document.getElementById("debug");
+	alert(e.key)
+}, false)
 
+
+
+/*
+window.requestAnimFrame = funcrion(){}
+
+document.getElementById("up").addEventListener("click", gestionnaireEvenements("up")); 
+document.getElementById("down").addEventListener("click", gestionnaireEvenements("down")); 
+document.getElementById("left").addEventListener("click", gestionnaireEvenements("left")); 
+document.getElementById("right").addEventListener("click", gestionnaireEvenements("right"));
+document.getElementById("pause").addEventListener("click", gestionnaireEvenements("pause"));
+document.getElementById("restart").addEventListener("click", gestionnaireEvenements("restart"));
+
+
+AZERTY
+	z=90
+	s=83
+	q=81
+	d=68
+	QWERTY
+	w=87
+	s=83
+	a=65
+	d=68
+	up=38
+	down=40
+	left=37
+	right=39
+	r=82
+	p=80
+	pause=19
+}, false)
+
+}
 
 function randint(min,max) {
 	return Math.floor(Math.random() * max) + min;
@@ -115,9 +152,13 @@ function reset(argument) {
 	// body...
 }
 
+main();
+*/
+
+
 ///////////////////////////////
 //Appel de fonction
-main();
+
 </script>
 </body>
 </html>

@@ -19,24 +19,22 @@
 <body>
 	<h1>Snake Canvas Basic</h1>
 	<p>Score : <span id="score"></span></p>
-	<div id="canvas">
-		
-
-	</div>
+	<canvas id="canvas">
+		Canvas non disponible ici. Change de navigateur.
+	</canvas>
 <script>
-window.onload = init;
 //Variables	
 ////Colors
-var white = (255,255,255);
-var grey = (128,128,128);
-var black = (0,0,0);
-var red = (255,0,0);
-var blue = (0,0,255);
+var white = 'rgba(255,255,255,1)';
+var grey = 'rgba(128,128,128,1)';
+var black = 'rgba(0,0,0,1)';
+var red = 'rgba(255,0,0,1)';
+var blue = 'rgba(0,0,255,1)';
 ////Cells
-var cellSize = 20 //Cise of one Cell
+var cellSize = 20; //Cise of one Cell
 ////Number of Cells in X and Y
-var cellX = 40
-var cellY = 30
+var cellX = 40;
+var cellY = 30;
 ////Moves
 var up = (0, -1)
 var down = (0, +1)
@@ -46,6 +44,17 @@ var right = (+1, 0)
 var fruit, snakeParts, snakeSize, orientation, over, score
 
 //Fonctions
+function draw() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext('2d');
+
+	ctx.fillStyle = red;
+ 	ctx.fillRect (20, 20, 10, 10);
+}
+
+draw()
+
+
 function randint(min,max) {
 	return Math.floor(Math.random() * max) + min;
 }
